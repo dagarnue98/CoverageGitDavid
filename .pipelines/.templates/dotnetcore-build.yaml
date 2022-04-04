@@ -61,7 +61,16 @@ steps:
     command: test
     projects: '${{ parameters.testProject }}'
     publishTestResults: true
-    arguments: '-c ${{ parameters.buildConfiguration }} /p:CollectCoverage=true "/p:CoverletOutputFormat=\"json,cobertura\"" /p:CoverletOutput="$(coverageRootPath)/" /p:MergeWith="$(coverageRootPath)/coverage.json" "/p:Exclude=\"[*.Test]*,[xunit.*]*,[*]System.*\""'
+    arguments: '-c ${{ parameters.buildConfiguration }} /p:CollectCoverage=true "/p:CoverletOutputFormat=\"json,cobertura\"" /p:CoverletOutput="$(coverageRootPath)/"'
+
+
+- task: DotNetCoreCLI@2
+  displayName: 'Test - Execute'    
+  inputs:
+    command: test
+    projects: '${{ parameters.testProject }}'
+    publishTestResults: true
+    arguments: '-c ${{ parameters.buildConfiguration }} /p:CollectCoverage=true "/p:CoverletOutputFormat=\"json,cobertura\"" /p:CoverletOutput="$(coverageRootPath)/" /p:MergeWith="$(coverageRootPath)/coverage.json"'
 
 
 
@@ -69,6 +78,6 @@ steps:
   displayName: 'Test - Publish coverage report'
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: $(coverageRootPath)/**/*.xml
+    summaryFileLocation: $(coverageRootPath)/**/*.json
     reportDirectory: $(coverageRootPath)/Reports
     failIfCoverageEmpty: false
