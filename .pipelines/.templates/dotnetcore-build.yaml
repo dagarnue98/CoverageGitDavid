@@ -6,7 +6,6 @@ parameters:
     dotnetCustomArguments: ''
     coverageRootPath: './coverage'
     netVersion: '6.x'
-    vstsFeed: '02ddf3f6-d1ed-4565-bc40-0773ac51d757'
     NUGET_PACKAGES: ''
  
 steps:
