@@ -1,7 +1,7 @@
 parameters:
     buildConfiguration: 'Release'
     solution: '**/*.csproj'
-    testProject: '**/*[Tt]est*/*.csproj'
+    testProject: 'TestingProject.csproj'
     workingDirectory: 'src'
     dotnetCustomArguments: ''
     coverageRootPath: './coverage'
