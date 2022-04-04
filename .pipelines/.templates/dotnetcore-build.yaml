@@ -49,7 +49,7 @@ steps:
     command: test
     projects: '${{ parameters.testProject }}'
     publishTestResults: true
-    arguments: '-c ${{ parameters.buildConfiguration }} /p:CollectCoverage=true "/p:CoverletOutputFormat=\"cobertura\" " /p:CoverletOutput="$(coverageRootPath)/" /p:MergeWith="$(coverageRootPath)/coverage.xml" "/p:Exclude=\"[[Tt]est*]*,[xunit.*]*,[*]System.*\""'
+    arguments: ''--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura'
 
 
 
@@ -57,6 +57,6 @@ steps:
   displayName: 'Test - Publish coverage report'
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: $(Agent.TempDirectory)/**/*.trx
+    summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
     reportDirectory: $(coverageRootPath)/Reports
     failIfCoverageEmpty: false
