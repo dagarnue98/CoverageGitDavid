@@ -49,7 +49,7 @@ steps:
     command: test
     projects: '${{ parameters.testProject }}'
     publishTestResults: true
-    arguments: ''--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura'
+    arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura'
 
 
 
