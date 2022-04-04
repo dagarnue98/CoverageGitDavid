@@ -51,14 +51,12 @@ steps:
     publishTestResults: true
     arguments: '-c ${{ parameters.buildConfiguration }} /p:CollectCoverage=true "/p:CoverletOutputFormat=\"cobertura\" " /p:CoverletOutput="$(coverageRootPath)/" /p:MergeWith="$(coverageRootPath)/coverage.xml" "/p:Exclude=\"[[Tt]est*]*,[xunit.*]*,[*]System.*\""'
 
-- script: |
-    reportgenerator -reports:$(coverageRootPath)/**/coverage.cobertura.xml -targetdir:$(coverageRootPath)/coverage -reporttypes:HtmlInline_AzurePipelines
-  displayName: 'Create code coverage report'
+
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Test - Publish coverage report'
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: $(coverageRootPath)/**/*.xml
+    summaryFileLocation: $(Agent.TempDirectory)/**/*.trx
     reportDirectory: $(coverageRootPath)/Reports
     failIfCoverageEmpty: false
