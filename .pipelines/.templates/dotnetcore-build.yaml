@@ -10,13 +10,21 @@ parameters:
     NUGET_PACKAGES: ''
  
 steps:
+
+- task: NuGetToolInstaller@1
+  displayName: 'NuGet tool installer'
+
+- task: UseDotNet@2 
+  displayName: ".NET Core ${{ parameters.netVersion }}"
+  inputs:
+    version: '${{ parameters.netVersion }}'
+    packageType: sdk
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
 - task: UseDotNet@2
   inputs:
     version: '3.0.x'
     packageType: runtime
-
-- task: NuGetToolInstaller@1
-  displayName: 'NuGet tool installer'
 
 - task: DotNetCoreCLI@2
   displayName: 'Install ReportGenerator'
@@ -24,13 +32,6 @@ steps:
     command: custom
     custom: tool
     arguments: 'install --global dotnet-reportgenerator-globaltool'
-  
-- task: UseDotNet@2 
-  displayName: ".NET Core ${{ parameters.netVersion }}"
-  inputs:
-    version: '${{ parameters.netVersion }}'
-    packageType: sdk
-    installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - task: DotNetCoreCLI@2
   displayName: 'DotNet - Restore'
