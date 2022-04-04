@@ -1,10 +1,11 @@
 parameters:
     buildConfiguration: 'Release'
     solution: '**/*.csproj'
-    testProject: 'TestingProject.csproj'
+    testProject: '**/[Tt]est*/*.csproj'
     workingDirectory: 'src'
     dotnetCustomArguments: ''
     coverageRootPath: './coverage'
+    vstsFeed: '02ddf3f6-d1ed-4565-bc40-0773ac51d757'
     netVersion: '6.x'
     NUGET_PACKAGES: ''
  
