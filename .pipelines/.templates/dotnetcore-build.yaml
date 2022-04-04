@@ -20,6 +20,13 @@ steps:
     command: custom
     custom: tool
     arguments: 'install --global dotnet-reportgenerator-globaltool'
+  
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'custom'
+    custom: 'add'
+    arguments: 'package coverlet.collector'
 
 - task: UseDotNet@2 
   displayName: ".NET Core ${{ parameters.netVersion }}"
