@@ -45,8 +45,8 @@ steps:
   inputs:
     command: 'custom'
     custom: 'add'
-    projects: '${{ parameters.solution }}'
-    arguments: 'package coverlet.collector'   
+    projects: '${{ parameters.testProject }}'
+    arguments: 'package coverlet.msbuild'
     
 - task: DotNetCoreCLI@2
   displayName: 'dotnet - Build'
