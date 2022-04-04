@@ -6,7 +6,7 @@ variables:
 - name: coverageRootPath
   value: '${{ variables.workingDirectory }}/coverage'
 - name: vmImage
-  value: windows-latest
+  value: ubuntu-latest
 
 stages:
 - stage: 'BuildTest'
