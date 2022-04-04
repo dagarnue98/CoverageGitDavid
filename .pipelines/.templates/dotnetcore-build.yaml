@@ -61,7 +61,7 @@ steps:
     command: test
     projects: '${{ parameters.testProject }}'
     publishTestResults: true
-    arguments: '-c ${{ parameters.buildConfiguration }} /p:CollectCoverage=true " "/p:CoverletOutputFormat=\"json,cobertura\" /p:CoverletOutput="$(coverageRootPath)/"'
+    arguments: '-c ${{ parameters.buildConfiguration }} /p:CollectCoverage=true  "/p:CoverletOutputFormat=\"json,cobertura\""  /p:CoverletOutput="$(coverageRootPath)/"'
 
 
 - task: DotNetCoreCLI@2
@@ -70,7 +70,7 @@ steps:
     command: test
     projects: '${{ parameters.testProject }}'
     publishTestResults: true
-    arguments: '-c ${{ parameters.buildConfiguration }} /p:CollectCoverage=true "/p:CoverletOutputFormat=\"json,cobertura\"" " /p:CoverletOutput="$(coverageRootPath)/" /p:MergeWith="$(coverageRootPath)/coverage.json"'
+    arguments: '-c ${{ parameters.buildConfiguration }} /p:CollectCoverage=true "/p:CoverletOutputFormat=\"json,cobertura\""  /p:CoverletOutput="$(coverageRootPath)/" /p:MergeWith="$(coverageRootPath)/coverage.json"'
 
 
 
