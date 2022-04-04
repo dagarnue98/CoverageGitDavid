@@ -15,7 +15,6 @@ stages:
   - job: BuildTest  
     displayName: 'Build & deploy'
     pool:
-      name: Default
       vmImage: '${{ variables.vmImage }}'      
     steps:
     - template: '/.pipelines/.templates/dotnetcore-build.yaml'
