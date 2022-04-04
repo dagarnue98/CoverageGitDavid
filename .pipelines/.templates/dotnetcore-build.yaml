@@ -14,6 +14,13 @@ steps:
 - task: NuGetToolInstaller@1
   displayName: 'NuGet tool installer'
 
+- task: DotNetCoreCLI@2
+  displayName: 'Install ReportGenerator'
+  inputs:
+    command: custom
+    custom: tool
+    arguments: 'install --global dotnet-reportgenerator-globaltool'
+
 - task: UseDotNet@2 
   displayName: ".NET Core ${{ parameters.netVersion }}"
   inputs:
@@ -42,7 +49,11 @@ steps:
     command: test
     projects: '${{ parameters.testProject }}'
     publishTestResults: true
-    arguments: '-c ${{ parameters.buildConfiguration }} /p:CollectCoverage=true "/p:CoverletOutputFormat=\"json,cobertura\"" /p:CoverletOutput="$(coverageRootPath)/" /p:MergeWith="$(coverageRootPath)/coverage.json" "/p:Exclude=\"[[Tt]est*]*,[xunit.*]*,[*]System.*\""'
+    arguments: '-c ${{ parameters.buildConfiguration }} /p:CollectCoverage=true "/p:CoverletOutputFormat=\"xml,cobertura\"" /p:CoverletOutput="$(coverageRootPath)/" /p:MergeWith="$(coverageRootPath)/coverage.xml" "/p:Exclude=\"[[Tt]est*]*,[xunit.*]*,[*]System.*\""'
+
+- script: |
+    reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverage -reporttypes:HtmlInline_AzurePipelines
+  displayName: 'Create code coverage report'
 
 - task: PublishCodeCoverageResults@1
   displayName: 'Test - Publish coverage report'
