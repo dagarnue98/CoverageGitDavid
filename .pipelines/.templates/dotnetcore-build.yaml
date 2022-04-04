@@ -48,6 +48,6 @@ steps:
   displayName: 'Test - Publish coverage report'
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: $(coverageRootPath)/**/*.xml
+    summaryFileLocation: $(coverageRootPath)/**/*.json
     reportDirectory: $(coverageRootPath)/Reports
     failIfCoverageEmpty: false
