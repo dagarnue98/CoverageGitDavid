@@ -86,7 +86,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      [XML]$report= Get-Content $(coverageRootPath)/**/*.xml
+      [XML]$report= Get-Content $(coverageRootPath)/coverage.covertura.xml
             
               if ($report.coverage.'line-rate' -lt 0.8) {
                 Write-Host "Coverage is less than 80 percent"
