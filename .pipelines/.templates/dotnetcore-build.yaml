@@ -90,8 +90,10 @@ steps:
             
               if ($report.coverage.'line-rate' -lt 0.8) {
                 Write-Host "Coverage is less than 80 percent"
-                $coverageFail= $false
+                $coverageFail= $true
+                exit 1
               }
+              else {$coverageFail=$false}
 
 
         
