@@ -82,14 +82,16 @@ steps:
     reportDirectory: $(coverageRootPath)/Reports
     failIfCoverageEmpty: false
 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      [XML]$report= Get-Content $(coverageRootPath)/**/*.xml
+            
+              if ($report.coverage.'line-rate' -lt 0.8) {
+                Write-Host "Coverage is less than 80 percent"
+                $coverageFail= $false
+              }
 
- - task: PowerShell@2
-    inputs:
-      targetType: 'inline'
-      script: |
-        [XML]$report= Get-Content $(coverageRootPath)/**/*.xml
-      
-        if ($report.coverage.'line-rate' -lt 0.8) {
-          Write-Host "Coverage is less than 80 percent"
-          $coverageFail= $false
-        }   
+
+        
